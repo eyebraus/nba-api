@@ -7,13 +7,13 @@
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",
-            "outputs": ["{options.outputPath}"],
             "options": {
                 "assets": ["packages/stdlib/*.md"],
                 "main": "packages/stdlib/src/index.ts",
                 "outputPath": "dist/packages/stdlib",
                 "tsConfig": "packages/stdlib/tsconfig.lib.json"
-            }
+            },
+            "outputs": ["{options.outputPath}"]
         },
         "lint": {
             "executor": "@nx/linter:eslint",

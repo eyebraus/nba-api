@@ -20,6 +20,7 @@
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "paths": {
+            "@nba-api/nba-api": ["packages/nba-api/src/index.ts"],
             "@nba-api/stdlib": ["packages/stdlib/src/index.ts"]
         },
         "resolveJsonModule": true,
