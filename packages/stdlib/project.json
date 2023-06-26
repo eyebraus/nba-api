@@ -1,0 +1,40 @@
+{
+    "name": "stdlib",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "packages/stdlib/src",
+    "tags": [],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "assets": ["packages/stdlib/*.md"],
+                "main": "packages/stdlib/src/index.ts",
+                "outputPath": "dist/packages/stdlib",
+                "tsConfig": "packages/stdlib/tsconfig.lib.json"
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["packages/stdlib/**/*.ts"]
+            },
+            "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            },
+            "executor": "@nx/jest:jest",
+            "options": {
+                "jestConfig": "packages/stdlib/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+        }
+    }
+}
