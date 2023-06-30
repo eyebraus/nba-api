@@ -104,7 +104,7 @@ export const tokenizeUsingNamingFormat = (value: string, namingFormat: NamingFor
             return tokenizeCamelOrPascalCase(value);
 
         case NamingFormat.KebabCase:
-        case NamingFormat.UppercaseUnderscoreCase:
+        case NamingFormat.UppercaseKebabCase:
             return value.split('-').map((token) => token.toLowerCase());
 
         case NamingFormat.UnderscoreCase:
