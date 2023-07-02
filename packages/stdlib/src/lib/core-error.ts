@@ -1,34 +1,34 @@
 import { Failure, FailureCode } from './failure';
-import { Initializer } from './initializer';
+import { OptionsInitializer } from './options-initializer';
 
 export interface CoreErrorOptions {
-    code: FailureCode;
+    code: string;
     innerError?: Error;
 }
 
-export const CoreErrorOptions = Initializer<CoreErrorOptions>({
+export const CoreErrorOptions = OptionsInitializer<CoreErrorOptions>({
     code: FailureCode.Unknown,
 });
 
-export interface CoreErrorProperties<TCode extends FailureCode = FailureCode> extends Failure<TCode> {
+export interface CoreErrorProperties extends Failure {
     innerError?: Error;
     name: string;
     stack?: string;
 }
 
-export class CoreError<TCode extends FailureCode = FailureCode> extends Error implements CoreErrorProperties<TCode> {
-    code: TCode;
+export class CoreError extends Error implements CoreErrorProperties {
+    code: string;
     innerError?: Error;
 
     constructor(message: string, options = CoreErrorOptions()) {
         super(message);
 
-        this.code = options.code as TCode;
+        this.code = options.code;
         this.innerError = options.innerError;
         this.name = options.code;
     }
 
-    toObject(): CoreErrorProperties<TCode> {
+    toObject(): CoreErrorProperties {
         return {
             code: this.code,
             innerError: this.innerError,
