@@ -1,0 +1,53 @@
+{
+    "name": "nba-api-test-app",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "packages/nba-api-test-app/src",
+    "tags": [],
+    "targets": {
+        "build": {
+            "defaultConfiguration": "production",
+            "executor": "@nx/esbuild:esbuild",
+            "options": {
+                "assets": ["packages/nba-api-test-app/src/assets"],
+                "bundle": true,
+                "esbuildOptions": {
+                    "outExtension": {
+                        ".js": ".js"
+                    },
+                    "sourcemap": true
+                },
+                "format": ["cjs"],
+                "generatePackageJson": true,
+                "main": "packages/nba-api-test-app/src/main.ts",
+                "outputPath": "dist/packages/nba-api-test-app",
+                "platform": "node",
+                "tsConfig": "packages/nba-api-test-app/tsconfig.app.json"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
+        "execute": {
+            "configurations": {
+                "development": {
+                    "buildTarget": "nba-api-test-app:build:development"
+                },
+                "production": {
+                    "buildTarget": "nba-api-test-app:build:production"
+                }
+            },
+            "defaultConfiguration": "production",
+            "executor": "@nx/js:node",
+            "options": {
+                "buildTarget": "nba-api-test-app:build",
+                "inspect": true
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["packages/nba-api-test-app/**/*.ts"]
+            },
+            "outputs": ["{options.outputFile}"]
+        }
+    }
+}
